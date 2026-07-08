@@ -1,12 +1,18 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace rechner2
 {
     internal class Program
     {
+        private static int zahl8;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Taschenrechner");
+            Console.WriteLine("Willkommen zum Taschenrechner!");
+            Console.WriteLine("Heute ist: " + DateTime.Now.ToString("dd.MM.yyyy"));
+            Console.WriteLine("Uhrzeit: " + DateTime.Now.ToString("HH:mm"));
+      
             Console.WriteLine("1. addition");
             Console.WriteLine("2. subtraktion");
             Console.WriteLine("3. multiplikation");
@@ -25,14 +31,24 @@ namespace rechner2
                 Console.WriteLine("Bitte ersten Sumand eingeben: ");
                 var sumand1 = Console.ReadLine();
 
+                if (!double.TryParse(sumand1, out double zahl1))
+                {
+                    Console.WriteLine("Ungültige Eingabe.");
+                    return;
+                }
+
                 Console.Clear();
 
                 Console.WriteLine("Bitte zweiten Sumand eingeben: ");
 
                 var sumand2 = Console.ReadLine();
 
-                var zahl1 = int.Parse(sumand1);
-                var zahl2 = int.Parse(sumand2);
+                if (!double.TryParse(sumand2, out double zahl2))
+
+                {
+                    Console.WriteLine("Ungültige Eingabe.");
+                    return;
+                }
                 var summe = zahl1 + zahl2;
 
                 Console.WriteLine("Summe: {0}", summe);
@@ -47,15 +63,25 @@ namespace rechner2
 
                 var minuend = Console.ReadLine();
 
+                if (!double.TryParse(minuend, out double zahl4))
+                {
+                    Console.WriteLine("Ungültige Eingabe.");
+                    return;
+                }
+
                 Console.Clear();
 
                 Console.WriteLine("Bitte den Subtrahend eingeben");
 
                 var subtrahend = Console.ReadLine();
 
-                var zahl3 = int.Parse(minuend);
-                var zahl4 = int.Parse(subtrahend);
-                var differenz = zahl3 - zahl4;
+                if (!double.TryParse(subtrahend, out double zahl3))
+                {
+                    Console.WriteLine("Ungültige Eingabe.");
+                    return;
+                }
+
+                var differenz = zahl4 - zahl3;
 
                 Console.WriteLine("Differenz: {0}", differenz);
             }
@@ -67,12 +93,22 @@ namespace rechner2
 
                 var faktor = Console.ReadLine();
 
+                if (!double.TryParse(faktor, out double zahl5))
+                {
+                    Console.WriteLine("Ungültige Eingabe.");
+                    return;
+                }
+
                 Console.WriteLine("Bitte den zweiten Faktor eingeben");
 
                 var faktor2 = Console.ReadLine();
 
-                var zahl5 = int.Parse(faktor);
-                var zahl6 = int.Parse(faktor2);
+                if (!double.TryParse(faktor2, out double zahl6))
+                {
+                    Console.WriteLine("Ungültige Eingabe.");
+                    return;
+                }
+
                 var produkt = zahl5 * zahl6;
 
                 Console.WriteLine("Produkt: {0}", produkt);
@@ -85,22 +121,48 @@ namespace rechner2
 
                     var dividend = Console.ReadLine();
 
+                    if (!double.TryParse(dividend, out double zahl7))
+                    {
+                        Console.WriteLine("Ungültige Eingabe.");
+                        return;
+                    }
                     Console.Clear();
+
 
                     Console.WriteLine("Bitte den Divisor eingeben");
 
                     var divisor = Console.ReadLine();
 
-                    var zahl7 = int.Parse(dividend);
-                    var zahl8 = int.Parse(divisor);
-                    var quotient = zahl7 / zahl8;
 
-                    Console.WriteLine("Quotient: {0}", quotient);
+
+                    if (!double.TryParse(divisor, out double zahl8))
+
+                    {
+                        Console.WriteLine("Ungültige Eingabe.");
+
+                        return;
+                        
+                    }
+
+                    if (zahl8 == 0)
+                    {
+                        Console.WriteLine("Division durch 0 ist nicht erlaubt");
+
+                    }
+                    else
+                    {
+
+                        var quotient = zahl7 / zahl8;
+
+                        Console.WriteLine("Quotient: {0}", quotient);
+                    }
                 }
             }
         }
     }
 }
+
+
 
     
 
